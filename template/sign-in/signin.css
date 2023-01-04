@@ -1,0 +1,31 @@
+html,
+*{
+  margin :0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 667px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #676d6d;
+}
+
+.box {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  padding: 5px 5px ;
+}
+
+.contentForm{
+  margin: 5%;
+}
