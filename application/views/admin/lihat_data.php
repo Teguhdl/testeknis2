@@ -64,17 +64,26 @@
                       </thead>
 
                       <tbody>
-                        <?php foreach($user as $data){ ?>
+                        <?php foreach($user as $data){ 
+
+                     if($data->active == 1){
+                         $data->active = 'Aktif';
+                     }else{
+                       $data->active = 'Tidak Aktif';
+                       }
+                           ?>
                          <tr>
                             <td><?= $data->id_user?></td>
                             <td><?= $data->username?></td>
                             <td><?= $data->level?></td>
                             <td><img src="<?=  base_url('media/images/') . $data->gambar; ?>" class=".img-rounded profile_img" ></td>
                             <td><?= $data->active?></td>
-                            <td >
+                            <td>
+                            <a href="<?= site_url()?>admin/ubah_data/<?= $data->id_user?>" class="btn btn-sm btn-warning">
+                            <i class="fa fa-edit"></i>
+                             </a>
                             <a onclick="deleteConfirm('<?= site_url()?>admin/hapus_data/<?= $data->id_user?>')" href="#!" class="btn btn-sm btn-danger">
                             <i class="fa fa-trash"></i>
-                            </a>
                             </a>
                             </td>
                         </tr>
