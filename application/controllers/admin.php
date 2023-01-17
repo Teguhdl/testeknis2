@@ -24,7 +24,9 @@ class Admin extends CI_Controller {
         $data1 = array(
             'user' => $this->usermode->getData(),
     );
+    
         $data = $this->db->get_where('user',['username' => $this->session->userdata('username')])->row_array();
+        
         $this->load->view('template/header',$data);
         $this->load->view('template/sidebar',$data);
         $this->load->view('admin/lihat_data',$data1);
@@ -66,6 +68,45 @@ class Admin extends CI_Controller {
             $this->load->view('template/header',$data);
             $this->load->view('template/sidebar',$data);
             $this->load->view('admin/tambah_data',$data);
+            $this->load->view('template/footer');
+        }
+
+    }
+
+    function ubah_data($id){
+        if ($this->input->post('id_user')) 
+        {
+            $data = [
+                'username' => $this->input->post('username'),
+                'level' => $this->input->post('level'),
+               
+                'password' => $this->input->post('password'),
+                'active' => $this->input->post('active'),
+                ];
+            $this->db->where('id_user', $this->input->post('id_user'));
+            if ($this->db->update('user', $data))
+            {
+                $this->session->set_flashdata('succses_msg', 'Kode User  '.$id.' berhasil diubah.');
+                redirect('admin/lihat_data');
+            }
+            else
+            {
+                $this->session->set_flashdata('error_msg', 'Data gagal perbarui.');
+                redirect('admin/lihat_data');
+            }
+        }
+        else
+        {
+            $data = $this->db->get_where('user',['username' => $this->session->userdata('username')])->row_array();
+
+            $data1 = [
+                    'id' => $id,
+                    'user' => $this->usermode->getdataId($id),
+                ];
+                    // print_r($data['kategori']);
+            $this->load->view('template/header',$data);
+            $this->load->view('template/sidebar',$data);
+            $this->load->view('admin/ubah_user',$data1);
             $this->load->view('template/footer');
         }
 
